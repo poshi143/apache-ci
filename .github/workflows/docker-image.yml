@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,10 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-
+  
+  deploy:
+    runs-on: docker-slave
+    steps:
     - name: Run container on self-hosted runner
       if: ${{ github.event_name == 'push' }}
       run: |
