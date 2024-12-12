@@ -27,6 +27,7 @@ jobs:
   
   deploy:
     runs-on: docker-slave
+    needs: build
     steps:
     - name: Run container on self-hosted runner
       if: ${{ github.event_name == 'push' }}
